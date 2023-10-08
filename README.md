@@ -11,7 +11,7 @@ To run the script on your server or computer:
 4. Then run "./MinecraftSetup.sh". This runs the script.
 For more specifics about what the script does, go to the instructions file in the script's folder.
 
-By running this script, you automatically agree to the terms and conditions of [PaperMC](link to terms) and the [Minecraft EULA](link to eula).
+By running this script, you automatically agree to the terms and conditions of PaperMC and the [Minecraft EULA](https://www.minecraft.net/eula).
 
 
 
