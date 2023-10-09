@@ -19,7 +19,7 @@ By running this script, you automatically agree to the terms and conditions of P
 
 ## The Roadmap for this project 
 As time goes on, we plan to add more functionality and settings to this script so you can create a simple auto setup script which caters to your needs better.
-The features and functions on the roadmap are not shown in any specific order unless they are specifically specified with prentheses
+The features and functions on the roadmap are not shown in any specific order unless they are specifically specified with parentheses
 
 
 1. ~~Prompt to agree to the Minecraft EULA~~ 
