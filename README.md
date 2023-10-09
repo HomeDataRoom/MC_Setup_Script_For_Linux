@@ -8,7 +8,7 @@ To run the script on your server or computer:
 1. Make sure you have administrative (root) privileges.
 2. Run "git clone https://github.com/HomeDataRoom/MC_Setup_Script_For_Linux.git" from your Linux console.
 3. or download the .zip from "https://github.com/HomeDataRoom/MC_Setup_Script_For_Linux/archive/refs/heads/main.zip"
-4. Once the script is downloaded (and/or unzipped), go into the 'scripts' folder
+4. Once the file(s) are downloaded (and/or unzipped), go into the 'scripts' folder
 5. Run "chmod +x MinecraftSetup.sh". This will allow you to execute the script.
 6. Then run "./MinecraftSetup.sh". This runs the script.
 For more specifics about what the script does, go to the instructions file in the script's folder.
