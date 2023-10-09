@@ -2,11 +2,11 @@ This document will go over how to run the 'MC Setup Script For Linux' script
 =====================================================================================================================
 
 
-If you downloaded the .zip file, unzip the content and go into the 'scripts' folder
-Give the MinecraftSetup.sh file execute permissions
-Then execute the script using './MinecraftSetup.sh' (make sure you're in the same folder as the script)
+If you downloaded the .zip file, unzip the content and go into the 'scripts' folder inside of the project folder that you just unzipped
+Give the MinecraftSetup.sh file execute permissions by running: 'chmod +x MinecraftSetup.sh'
+Then execute the script using './MinecraftSetup.sh' or run: 'bash MinecraftSetup.sh' (make sure you're in the same folder as the script)
 
-If you just downloaded the .sh file, give it execute permissions
+If you just downloaded the .sh file, give it execute permissions by running: 'chmod +x MinecraftSetup.sh'
 Then execute the script using './MinecraftSetup.sh' (make sure you're in the same folder as the script)
 
 
@@ -15,37 +15,41 @@ You will be prompted to put in your administrative password, because you'll be u
 DO NOT RUN THIS AS ROOT!!!!! THAT IS A MAJOR SECURITY RISK!!!
 
 1. Once your system is fully up to date and OpenJDK is installed, PaperMC 1.20.2 will be installed from the official PaperMC website
-2. A minecraft directory will be made in '/opt'
-3. The server will start, then it will stop because the EULA isn't agreed to
-4. The EULA will be changed to 'true' and the server will start again
-5. A simple start script will also be created at '/home/$USER/', called 'MC_Start.sh'
-6. A systemd service will be created called 'minecraft.service' and it will use $USER (your user account) as the account to run the service
-7. The systemd service will be enabled and started, you will be thrown into screen (the Minecraft console) after everything is finished.
+2. A new user and group will be created called 'minecraft' 
+4. A minecraft directory will be made in '/opt'
+5. The server will start, then it will stop because the EULA isn't agreed to
+6. The EULA will be changed to 'true' and the server will start again
+7. A simple start script will also be created at '/opt/minecraft/', called 'MC_Start.sh'
+8. A systemd service will be created called 'minecraft.service' and it will use the 'minecraft' user as the account to run the service
+9. The systemd service will be enabled and started
+10. A collection of aliases will be added to a file called 'minecraft-aliases.sh' in '/etc/profile.d'
+11. A final finish screen will be displayed explaining everything and giving a thank you for downloading this script
 
 ##################################################
                After Installation
 ##################################################
 
 If your server/computer turns off, the Minecraft 
-server does not automatically turn back on when you
-turn back on the server/computer; you will have to 
-turn it back on yourself. This is why I made 
-a simple start script at /MC_Start.sh. 
-
-Run this:
-"sudo systemctl start minecraft.service"
+server does automatically turn back on when you
+turn back on the server/computer; you will not 
+have to turn it back on yourself. If the server
+is off for any reason, you can run 'mcstart' and
+it should turn on in a moment or two. 
 
 
-To check if the service (the Minecraft server) is running run:
-"sudo systemctl status minecraft.service"
+Here are all of the aliases that were created:
 
-and look for: 'Active: active (running)'
+   mcscreen - this brings up the Minecraft server console
+     - to exit this screen press 'Ctrl' + 'a', then 'd'
+   mcstart - this starts the Minecraft systemd service
+   mcstop - this stops the Minecraft systemd service
+   mcstatus - this checks the status of the Minecraft systemd service
+   mcrestart - this restarts the Minecraft systemd service
+   mcdisable - this disables the Minecraft systemd service (prevents auto start function)
+   mcenable - this enables the Minecraft systemd service (enables the auto start function)
 
-
-To stop the service (the Minecraft server), run:
-"sudo systemctl stop minecraft.service"
-
-
-If you exit the SSH connection and come back and don't have access to the Minecraft console, run (if the service is running):
-"screen -r"
-
+A lot of the older commands may still work from 
+previous version of this script. However some-
+things may not work like they used to, for example
+'screen -r'. You will have to use 'mcscreen' if you
+want to view the Minecraft server console. 
