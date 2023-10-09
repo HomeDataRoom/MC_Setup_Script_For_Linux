@@ -8,9 +8,9 @@ To run the script on your server or computer:
 1. Make sure you have administrative (root) privileges.
 2. Run "git clone https://github.com/HomeDataRoom/MC_Setup_Script_For_Linux.git" from your Linux console.
 3. or download the .zip from "https://github.com/HomeDataRoom/MC_Setup_Script_For_Linux/archive/refs/heads/main.zip"
-4. Once the file(s) are downloaded (and/or unzipped), go into the 'scripts' folder
+4. Once the file(s) are downloaded (and/or unzipped), go into the 'scripts' folder in the project's folder
 5. Run "chmod +x MinecraftSetup.sh". This will allow you to execute the script.
-6. Then run "./MinecraftSetup.sh". This runs the script.
+6. Then run "./MinecraftSetup.sh" or "bash MinecraftSetup.sh". This runs the script.
 For more specifics about what the script does, go to the instructions file in the script's folder.
 
 By running this script, you automatically agree to the terms and conditions of PaperMC and the [Minecraft EULA](https://www.minecraft.net/eula).
@@ -19,16 +19,16 @@ By running this script, you automatically agree to the terms and conditions of P
 
 ## The Roadmap for this project 
 As time goes on, we plan to add more functionality and settings to this script so you can create a simple auto setup script which caters to your needs better.
-The features and functions on the roadmap are not shown in any specific order unless they are specifically specified with parentheses
+The features and functions on the roadmap are not shown in any specific order unless they are specifically specified with prentheses
 
 
 1. ~~Prompt to agree to the Minecraft EULA~~ 
 2. ~~Install all Minecraft files to /opt~~
 3. ~~Open up port 25565/tcp~~
 4. ~~Create a systemd autostart script (when the computer turns on, the Minecraft server automatically is run)~~
-5. Display a list of commands that can help you manage the Minecraft server; such as: 'htop', 'systemctl status minecraft.service', 'screen -r', etc
-6. Create a 'minecraft' user and group
-7. Create aliases for commands that help manage the minecraft server such as a start and stop command, status command, reset server command, etc
+5. ~~Display a list of commands that can help you manage the Minecraft server; such as: 'htop', 'systemctl status minecraft.service', 'screen -r', etc~~
+6. ~~Create a 'minecraft' user and group~~
+7. ~~Create aliases for commands that help manage the minecraft server such as a start and stop command, status command, reset server command, etc~~
 8. Minecraft version selection 
 9. Auto select the correct version of OpenJDK
 10. Minecraft launcher selection (PaperMC, Bukkit, Forge, etc)
