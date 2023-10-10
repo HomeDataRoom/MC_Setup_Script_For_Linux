@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 # Clears the screen #
 clear
@@ -54,14 +54,36 @@ paperUrl="${paperUrls[$mcVers]}"
 wget $paperUrl
 
 # Decides what version of OpenJDK you need #
-    if [[ $mcVers -ge 4 && $mcVers -le ${#paperUrls[@]} ]]; then
+    if [[ $mcVers -ge 6 && $mcVers -le ${#paperUrls[@]} ]]; then
         echo "Downloading OpenJDK-8-JRE"
         sudo apt install openjdk-8-jre -y
         break
-    elif [[ $mcVers -le 3 ]]; then
+
+    elif [[ $mcVers -le 5 ]]; then
         echo "Downloading OpenJDK-17-JRE"
         sudo apt install openjdk-17-jre -y
         break
     else
         echo "Something has broken, please contact support@homedataroom.com"
     fi
+
+
+# Makes the Minecraft directory in /opt #
+sudo mkdir /opt/minecraft
+# Gives the 'minecraft' running this script full ownership of the Minecraft directory #
+sudo chown minecraft:minecraft /opt/minecraft
+# Moves PaperMC to '/opt/minecraft' and renames it 'mcserver.jar' #
+sudo mv paper-1* /opt/minecraft/mcserver.jar
+sudo chown minecraft:minecraft /opt/minecraft/mcserver.jar
+# Start the Minecraft server so the right files and folders are created and downloaded #
+cd /opt/minecraft
+# Switches to 'minecraft' user # 
+sudo su minecraft <<EOF
+bash
+java -jar /opt/minecraft/mcserver.jar nogui
+#Accepts the EULA#
+sed -i 's/false/true/g' eula.txt
+exit 
+exit
+EOF
+# Back to current user #
