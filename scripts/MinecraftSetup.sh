@@ -65,6 +65,7 @@ sudo apt upgrade -y
 # Installs screen #
 sudo apt install screen -y
 
+clear
 # Prompts user to select which Minecraft launcher they want to download - you can modify this to add more launchers and options#
 declare -A launchPaths=(
     [1]="PaperDownloader.sh"
