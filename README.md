@@ -29,12 +29,12 @@ The features and functions on the roadmap are not shown in any specific order un
 5. ~~Display a list of commands that can help you manage the Minecraft server; such as: 'htop', 'systemctl status minecraft.service', 'screen -r', etc~~
 6. ~~Create a 'minecraft' user and group~~
 7. ~~Create aliases for commands that help manage the minecraft server such as a start and stop command, status command, reset server command, etc~~
-8. Minecraft version selection 
-9. Auto select the correct version of OpenJDK
-10. Minecraft launcher selection (PaperMC, Bukkit, Forge, etc)
+8. ~~Minecraft version selection~~ 
+9. ~~Auto select the correct version of OpenJDK~~
+10. ~~Minecraft launcher selection (PaperMC, Bukkit, Forge, etc)~~
 11. RCON Password Creation
 12. Open up port 25575/tcp
-13. Minecraft port selector
+13. ~~Minecraft port selector~~
 14. Server reset command and prompt (deletes the world files so upon next restart, the server is loaded as a new world)
 15. Simple properties and settings selector (difficulty, gamemode, etc)
 16. Simple Minecraft management webserver
