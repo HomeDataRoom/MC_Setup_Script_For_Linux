@@ -1,5 +1,8 @@
 #!bin/bash
 
+# Clears the screen #
+clear
+
 # List of PaperMC versions and their URLs #
 declare -A paperUrls=(
     [1]="https://api.papermc.io/v2/projects/paper/versions/1.20.2/builds/224/downloads/paper-1.20.2-224.jar"
@@ -51,11 +54,11 @@ wget $paperUrl
 # Decides what version of OpenJDK you need #
     if [[ $mcVers -ge 4 && $mcVers -le ${#paperUrls[@]} ]]; then
         echo "Downloading OpenJDK-8-JRE"
-        sudo apt install openjdk-8-jre
+        sudo apt install openjdk-8-jre -y
         break
     elif [[ $mcVers -le 3 ]]; then
         echo "Downloading OpenJDK-17-JRE"
-        sudo apt install openjdk-17-jre
+        sudo apt install openjdk-17-jre -y
         break
     else
         echo "Something has broken, please contact support@homedataroom.com"
