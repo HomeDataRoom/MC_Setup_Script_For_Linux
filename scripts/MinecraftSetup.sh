@@ -64,8 +64,8 @@ sudo apt update
 sudo apt upgrade -y
 # Installs screen #
 sudo apt install screen -y
-
 clear
+
 # Prompts user to select which Minecraft launcher they want to download - you can modify this to add more launchers and options#
 declare -A launchPaths=(
     [1]="PaperDownloader.sh"
@@ -109,13 +109,12 @@ sudo ufw allow 22/tcp
 sudo ufw allow $mcPort/tcp 
 echo "y" | sudo ufw enable
 echo ""
-echo "Firewall is enabled; port 22 and 25565 are open."
+echo "Firewall is enabled; port 22 and $mcPort are open."
 echo ""
 sleep 4
 
 #Creates the 'minecraft' user and group #
 sudo useradd minecraft
-sudo groupadd minecraft
 sudo usermod -aG minecraft $USER
 
 echo ""
