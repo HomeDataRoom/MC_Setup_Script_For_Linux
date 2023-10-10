@@ -33,27 +33,86 @@ echo "after setup"
 sleep 8
 clear
 
-#Simple confirmation that the script is moving on from the initial splash screen#
+# Simple confirmation that the script is moving on from the initial splash screen #
 echo "Now onto the actual installation and setup!"
 sleep 4
 clear
 
-#Updates the repos with latest packages#
+# Port selection tool for the Minecraft server port #
+while true; do
+read -p "What port do you want your Minecraft server to be on? (Default: 25565) " mcPort
+
+ if [[ $mcPort -ge 4096 ]]
+    then
+        echo Using port $mcPort.
+        break
+    elif [[ $mcPort == '' ]]
+    then
+        declare mcPort=25565
+        echo "Going with the default port (25565)"
+        break
+    else
+    echo Please choose legit port.
+ fi
+done
+sleep 5
+clear
+
+# Updates the repos with latest packages #
 sudo apt update
-#Updates and upgrades packages and software#
+# Updates and upgrades packages and software #
 sudo apt upgrade -y
-#Installs openJDK Java Runtime Environment and screen#
-sudo apt install openjdk-19-jre screen -y
-#Allows ports 22/tcp (SSH) and 25565/tcp (Minecraft) through and enables the ufw (Uncomplicated Firewall)#
+# Installs screen #
+sudo apt install screen -y
+
+# Prompts user to select which Minecraft launcher they want to download - you can modify this to add more launchers and options#
+declare -A launchPaths=(
+    [1]="PaperDownloader.sh"
+    [2]="ForgeDownloader.sh"
+)
+
+echo ""
+echo "#######################################################################"
+echo "Do not select Forge at this time! We do not have the script ready yet."
+echo "           Just putting it in here for when we do add it              "
+echo ""
+echo "#######################################################################"
+echo ""
+echo ""
+echo "             PaperMC [1]                    Forge   [2]                "
+echo ""
+
+while true; do
+    read -p "What Minecraft server launcher would you like to use? " mcLaunch
+
+    if [[ $mcLaunch == 1 ]]; then
+        echo Running the PaperMC Downloader
+        break
+    elif [[ $mcLaunch == 2 ]]; then
+        echo Running the Forge Downloader
+        break
+    else
+        echo Please choose a proper Minecraft launcher from the options.
+    fi
+
+done
+
+# runs the downloader #
+bash "${launchPaths[$mcLaunch]}"
+clear
+sleep 1
+
+#Allows ports 22/tcp (SSH) and $mcPort/tcp (Minecraft) through and enables the ufw (Uncomplicated Firewall) #
 sudo ufw allow 22/tcp 
-sudo ufw allow 25565/tcp 
+#User generated port from port selection function #
+sudo ufw allow $mcPort/tcp 
 echo "y" | sudo ufw enable
 echo ""
 echo "Firewall is enabled; port 22 and 25565 are open."
 echo ""
 sleep 4
 
-#Creates the 'minecraft' user and group#
+#Creates the 'minecraft' user and group #
 sudo useradd minecraft
 sudo groupadd minecraft
 sudo usermod -aG minecraft $USER
@@ -62,23 +121,16 @@ echo ""
 echo "You have been added to the 'minecraft' group"
 echo ""
 
-#Downloads PaperMC version 1.20.2#
-echo ""
-echo 'Please wait while PaperMC 1.20.2 downloads'
-echo ""
-sleep 5
-wget https://api.papermc.io/v2/projects/paper/versions/1.20.2/builds/217/downloads/paper-1.20.2-217.jar
-
-#Makes the Minecraft directory in /opt#
+# Makes the Minecraft directory in /opt #
 sudo mkdir /opt/minecraft
-#Gives the 'minecraft' running this script full ownership of the Minecraft directory#
+# Gives the 'minecraft' running this script full ownership of the Minecraft directory #
 sudo chown minecraft:minecraft /opt/minecraft
-#Moves PaperMC to '/opt/minecraft' and renames it 'StartPaperMC.jar'#
-sudo mv paper-1.20.2* /opt/minecraft/StartPaperMC.jar
+# Moves PaperMC to '/opt/minecraft' and renames it 'StartPaperMC.jar' #
+sudo mv paper-1* /opt/minecraft/StartPaperMC.jar
 sudo chown minecraft:minecraft /opt/minecraft/StartPaperMC.jar
-#Start the Minecraft server so the right files and folders are created and downloaded#
+# Start the Minecraft server so the right files and folders are created and downloaded #
 cd /opt/minecraft
-#Switches to 'minecraft' user# 
+# Switches to 'minecraft' user # 
 sudo su minecraft <<EOF
 bash
 java -jar /opt/minecraft/StartPaperMC.jar nogui
@@ -87,18 +139,22 @@ sed -i 's/false/true/g' eula.txt
 exit 
 exit
 EOF
-#Back to current user#
+# Back to current user #
 
-#Creates a Minecraft bash start script in /opt/minecraft (for convenience)#
+# Changes the Minecraft default port to the one selected by the user #
+sudo sed -i "s/server-port=25565/server-port=$mcPort/g" /opt/minecraft/server.properties
+
+
+# Creates a Minecraft bash start script in /opt/minecraft (for convenience) #
 sudo touch /opt/minecraft/MC_Start.sh
 sudo chown minecraft:minecraft /opt/minecraft/MC_Start.sh
-sudo tee -a /opt/minecraft/MC_Start.sh > /dev/null <<EOF
+sudo tee /opt/minecraft/MC_Start.sh > /dev/null <<EOF
 cd /opt/minecraft && screen -dm java -jar StartPaperMC.jar nogui
 EOF
 sudo chmod +x /opt/minecraft/MC_Start.sh
 
 #Creates Systemd service (used for auto-start feature)#
-sudo tee -a /lib/systemd/system/minecraft.service > /dev/null <<EOF
+sudo tee /lib/systemd/system/minecraft.service > /dev/null <<EOF
 [Unit]
 Description=MC auto start script
 Wants=network.target
@@ -126,7 +182,7 @@ sleep 4
 
 #Creating a global aliases bash file#
 sudo touch /etc/profile.d/minecraft-aliases.sh
-sudo tee -a /etc/profile.d/minecraft-aliases.sh > /dev/null <<EOF
+sudo tee /etc/profile.d/minecraft-aliases.sh > /dev/null <<EOF
 alias mcscreen="sudo su minecraft -c 'screen -dr'"
 alias mcstop="sudo systemctl stop minecraft.service"
 alias mcstart="sudo systemctl start minecraft.service"
@@ -185,7 +241,8 @@ read -p "Do you wish to close this finish screen?: (y/n) " yn
  case $yn in
 	[yY] ) echo closing screen;
 		break;;
-	[nN] ) echo okay;;
+	[nN] ) echo okay;
+        sleep 15;;
 	* ) echo Invalid response;;
  esac
 done
