@@ -1,29 +1,38 @@
 This document will go over how to run the 'MC Setup Script For Linux' script 
-=====================================================================================================================
+===================================================================================================================================================
 
 
 If you downloaded the .zip file, unzip the content and go into the 'scripts' folder inside of the project folder that you just unzipped
 Give the MinecraftSetup.sh file execute permissions by running: 'chmod +x MinecraftSetup.sh'
 Then execute the script using './MinecraftSetup.sh' or run: 'bash MinecraftSetup.sh' (make sure you're in the same folder as the script)
 
-If you just downloaded the .sh file, give it execute permissions by running: 'chmod +x MinecraftSetup.sh'
+If you just downloaded the .sh files, give them execute permissions by running: 'chmod +x MinecraftSetup.sh'
 Then execute the script using './MinecraftSetup.sh' (make sure you're in the same folder as the script)
+Make sure you have both 'MinecraftSetup.sh' AND 'PaperDownloader.sh' in the same directory; later this will include ForgeDownloader.sh as well
 
 
+You will be prompted to put in your administrative password, because you'll be updating your repos and packages, installing OpenJDK, 
+and adding a directory for the Minecraft server in /opt, creating a collection of aliases, creating and enabling a minecraft systemd service,
+and enabling the firewall
 
-You will be prompted to put in your administrative password, because you'll be updating your repos and packages, installing OpenJDK 19, and adding a directory for the Minecraft server in /opt. 
 DO NOT RUN THIS AS ROOT!!!!! THAT IS A MAJOR SECURITY RISK!!!
 
-1. Once your system is fully up to date and OpenJDK is installed, PaperMC 1.20.2 will be installed from the official PaperMC website
-2. A new user and group will be created called 'minecraft' 
-4. A minecraft directory will be made in '/opt'
-5. The server will start, then it will stop because the EULA isn't agreed to
-6. The EULA will be changed to 'true' and the server will start again
-7. A simple start script will also be created at '/opt/minecraft/', called 'MC_Start.sh'
-8. A systemd service will be created called 'minecraft.service' and it will use the 'minecraft' user as the account to run the service
-9. The systemd service will be enabled and started
-10. A collection of aliases will be added to a file called 'minecraft-aliases.sh' in '/etc/profile.d'
-11. A final finish screen will be displayed explaining everything and giving a thank you for downloading this script
+1. You will be prompted to agree to the Minecraft EULA
+2. You will be prompted to select a port for the Minecraft server to run on
+3. Your system will update it's repos and any out of date packages
+4. You will be prompted to select which Minecraft launcher you would like to use
+5. Depending on the launcher you select, you will be prompted to select the version of the launcher and Minecraft you would like to download
+6. Once that is finished, the correct version of OpenJDK will also be installed based on the version of Minecraft you selected
+7. The port you selected earlier and port TCP port 22 (SSH) will be opened up on the UFW (uncomplicated firewall)
+8. A new user and group will be created called 'minecraft' 
+9. A minecraft directory will be made in '/opt'
+10. The server will start, then it will stop because the EULA isn't agreed to
+11. The EULA will be changed to 'true' and the server will start again
+12. A simple start script will also be created at '/opt/minecraft/', called 'MC_Start.sh'
+13. A systemd service will be created called 'minecraft.service' and it will use the 'minecraft' user as the account to run the service
+14. The systemd service will be enabled and started
+15. A collection of aliases will be added to a file called 'minecraft-aliases.sh' in '/etc/profile.d'
+16. A final finish screen will be displayed explaining everything and giving a thank you for downloading this script
 
 ##################################################
                After Installation
