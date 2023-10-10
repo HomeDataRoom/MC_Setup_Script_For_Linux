@@ -66,6 +66,14 @@ sudo apt upgrade -y
 sudo apt install screen -y
 clear
 
+#Creates the 'minecraft' user and group #
+sudo useradd minecraft
+sudo usermod -aG minecraft $USER
+
+echo ""
+echo "You have been added to the 'minecraft' group"
+echo ""
+
 # Prompts user to select which Minecraft launcher they want to download - you can modify this to add more launchers and options#
 declare -A launchPaths=(
     [1]="PaperDownloader.sh"
@@ -74,13 +82,13 @@ declare -A launchPaths=(
 
 echo ""
 echo "#######################################################################"
-echo "Do not select Forge at this time! We do not have the script ready yet."
-echo "           Just putting it in here for when we do add it              "
-echo ""
+echo "       Select the Minecraft server launcher you would like to use      "
+echo "                PaperMC for regular Minecraft servers                  "
+echo "                 Forge for modded Minecraft servers                    "
 echo "#######################################################################"
 echo ""
 echo ""
-echo "             PaperMC [1]                    Forge   [2]                "
+echo "             PaperMC [1]                    Forge [2]                  "
 echo ""
 
 while true; do
@@ -113,43 +121,14 @@ echo "Firewall is enabled; port 22 and $mcPort are open."
 echo ""
 sleep 4
 
-#Creates the 'minecraft' user and group #
-sudo useradd minecraft
-sudo usermod -aG minecraft $USER
-
-echo ""
-echo "You have been added to the 'minecraft' group"
-echo ""
-
-# Makes the Minecraft directory in /opt #
-sudo mkdir /opt/minecraft
-# Gives the 'minecraft' running this script full ownership of the Minecraft directory #
-sudo chown minecraft:minecraft /opt/minecraft
-# Moves PaperMC to '/opt/minecraft' and renames it 'StartPaperMC.jar' #
-sudo mv paper-1* /opt/minecraft/StartPaperMC.jar
-sudo chown minecraft:minecraft /opt/minecraft/StartPaperMC.jar
-# Start the Minecraft server so the right files and folders are created and downloaded #
-cd /opt/minecraft
-# Switches to 'minecraft' user # 
-sudo su minecraft <<EOF
-bash
-java -jar /opt/minecraft/StartPaperMC.jar nogui
-#Accepts the EULA#
-sed -i 's/false/true/g' eula.txt
-exit 
-exit
-EOF
-# Back to current user #
-
 # Changes the Minecraft default port to the one selected by the user #
 sudo sed -i "s/server-port=25565/server-port=$mcPort/g" /opt/minecraft/server.properties
-
 
 # Creates a Minecraft bash start script in /opt/minecraft (for convenience) #
 sudo touch /opt/minecraft/MC_Start.sh
 sudo chown minecraft:minecraft /opt/minecraft/MC_Start.sh
 sudo tee /opt/minecraft/MC_Start.sh > /dev/null <<EOF
-cd /opt/minecraft && screen -dm java -jar StartPaperMC.jar nogui
+cd /opt/minecraft && screen -dm java -jar mcserver.jar nogui
 EOF
 sudo chmod +x /opt/minecraft/MC_Start.sh
 
