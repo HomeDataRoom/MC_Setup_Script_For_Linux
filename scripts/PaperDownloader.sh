@@ -18,15 +18,17 @@ declare -A paperUrls=(
 
 # List of versions to select from (Displayed for the user) #
 
-echo "1. 1.20.2"
-echo "2. 1.19.4"
-echo "3. 1.18.2"
-echo "4. 1.17.1"
-echo "5. 1.16.5"
-echo "6. 1.15.2"
-echo "7. 1.14.4"
-echo "8. 1.13.2"
-echo "9. 1.12.2"
+echo ""
+echo "1).   1.20.2"
+echo "2).   1.19.4"
+echo "3).   1.18.2"
+echo "4).   1.17.1"
+echo "5).   1.16.5"
+echo "6).   1.15.2"
+echo "7).   1.14.4"
+echo "8).   1.13.2"
+echo "9).   1.12.2"
+echo ""
 
 # If, elif, then statement that loops if improper input was declared; chooses 1.20.2 if nothing is chosen, and selects the version you want if you input a version #
 while true; do
@@ -63,4 +65,3 @@ wget $paperUrl
     else
         echo "Something has broken, please contact support@homedataroom.com"
     fi
-
