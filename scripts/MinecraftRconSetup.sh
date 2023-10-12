@@ -29,6 +29,7 @@ sudo sed -i "s/rcon.password=/rcon.password=$rpass/g" /opt/minecraft/server.prop
 echo ""
 echo "Minecraft RCON web console is setup!!!"
 echo ""
+sleep 3
 
 # Restarts both minecraft.service and apache2.service #
 sudo systemctl reload apache2.service
