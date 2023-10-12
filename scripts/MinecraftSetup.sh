@@ -194,6 +194,8 @@ echo ""
  esac
 done
 
+# Starts Minecraft service after doing RCON install #
+sudo systemctl start minecraft.service
 
 #Displays a finished screen and gives some simple instructions on how to use the aliases created#
 
