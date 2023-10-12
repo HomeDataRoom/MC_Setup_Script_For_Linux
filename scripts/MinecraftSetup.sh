@@ -157,7 +157,9 @@ sudo systemctl status minecraft.service
 echo ""
 echo "Minecraft service has been created and enabled"
 echo ""
-sleep 4
+sleep 10
+
+sudo systemctl stop minecraft.service
 
 #Creating a global aliases bash file#
 sudo touch /etc/profile.d/minecraft-aliases.sh
