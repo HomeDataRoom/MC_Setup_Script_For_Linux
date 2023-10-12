@@ -30,12 +30,12 @@ echo "Please read the instructions file to understand what this"
 echo "script does, the requirements for this script and the"
 echo "commands that are necessary to run your Minecraft server"
 echo "after setup"
-sleep 8
+sleep 7
 clear
 
 # Simple confirmation that the script is moving on from the initial splash screen #
 echo "Now onto the actual installation and setup!"
-sleep 4
+sleep 2
 clear
 
 # Port selection tool for the Minecraft server port #
@@ -55,7 +55,7 @@ read -p "What port do you want your Minecraft server to be on? (Default: 25565) 
     echo Please choose legit port.
  fi
 done
-sleep 5
+sleep 3
 clear
 
 # Updates the repos with latest packages #
@@ -119,7 +119,7 @@ echo "y" | sudo ufw enable
 echo ""
 echo "Firewall is enabled; port 22 and $mcPort are open."
 echo ""
-sleep 4
+sleep 2
 
 # Changes the Minecraft default port to the one selected by the user #
 sudo sed -i "s/server-port=25565/server-port=$mcPort/g" /opt/minecraft/server.properties
@@ -149,6 +149,7 @@ ExecStart=/bin/bash /opt/minecraft/MC_Start.sh
 WantedBy=multi-user.target
 EOF
 
+clear
 #Enables the minecraft.service, start the service, runs a status check for the service#
 sudo systemctl enable minecraft.service
 sudo systemctl start minecraft.service
@@ -157,7 +158,7 @@ sudo systemctl status minecraft.service
 echo ""
 echo "Minecraft service has been created and enabled"
 echo ""
-sleep 12
+sleep 5
 
 #Creating a global aliases bash file#
 sudo touch /etc/profile.d/minecraft-aliases.sh
@@ -171,6 +172,11 @@ alias mcdisable="systemctl disable minecraft.service"
 alias mcenable="systemctl enable minecraft.service"
 EOF
 
+echo ""
+echo "Aliases have been created"
+echo ""
+sleep 1
+
 # Asks the user if they would like to install the Minecraft Rcon web console #
 while true; do
 clear
@@ -183,7 +189,7 @@ echo ""
 # Check the user's response #
  case $yn in
 	[yY] ) echo Installing Apache Web Server and the RCON Web Console;
-        sleep 4
+        sleep 2
 		bash Apache2Setup.sh;
         break;;
 	[nN] ) echo "Moving on then!";
@@ -192,8 +198,13 @@ echo ""
  esac
 done
 
+clear
+# Restarts the Minecraft server for a final time #
+sudo systemctl restart minecraft.service
 
-#Displays a finished screen and gives some simple instructions on how to use the aliases created#
+# Have to restart the Minecraft server for a final time because of a weird bug or flaw in older versions of Minecraft that don't load rcon.password='' from the beginning, which breaks 'MinecraftRconSetup.sh #
+
+# Displays a finished screen and gives some simple instructions on how to use the aliases created #
 
 clear
 echo ""
@@ -243,7 +254,7 @@ read -p "Do you wish to close this finish screen?: (y/n) " yn
 	[yY] ) echo closing screen;
 		break;;
 	[nN] ) echo okay;
-        sleep 15;;
+        sleep 10;;
 	* ) echo Invalid response;;
  esac
 done
