@@ -176,7 +176,7 @@ while true; do
 clear
 echo ""
 echo ""
-read -p "Would you like to install the Minecraft Web RCON Console " yn
+read -p "Would you like to install the Minecraft Web RCON Console and web server (y/n): " yn
 echo ""
 echo ""
 
