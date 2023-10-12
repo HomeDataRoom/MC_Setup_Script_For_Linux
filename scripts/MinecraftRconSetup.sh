@@ -20,11 +20,15 @@ sudo sed -i "s/enable-rcon=false/enable-rcon=true/g" /opt/minecraft/server.prope
 
 # Stops Minecraft to refresh the server.properies file #
 sudo systemctl stop minecraft.service 
-sleep 5
+sleep 1
 sudo systemctl start minecraft.service
 
 sleep 4
 sudo sed -i "s/rcon.password=/rcon.password=$rpass/g" /opt/minecraft/server.properties
+
+echo ""
+echo "Minecraft RCON web console is setup!!!"
+echo ""
 
 # Restarts both minecraft.service and apache2.service #
 sudo systemctl reload apache2.service
