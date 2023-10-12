@@ -157,9 +157,7 @@ sudo systemctl status minecraft.service
 echo ""
 echo "Minecraft service has been created and enabled"
 echo ""
-sleep 10
-
-sudo systemctl stop minecraft.service
+sleep 12
 
 #Creating a global aliases bash file#
 sudo touch /etc/profile.d/minecraft-aliases.sh
@@ -186,16 +184,13 @@ echo ""
  case $yn in
 	[yY] ) echo Installing Apache Web Server and the RCON Web Console;
         sleep 4
-		bash Apache2Setup.sh;
-  		break;;
+		bash Apache2Setup.sh;;
 	[nN] ) echo "Moving on then!";
         break;;
 	* ) echo Invalid response;;
  esac
 done
 
-# Starts Minecraft service after doing RCON install #
-sudo systemctl start minecraft.service
 
 #Displays a finished screen and gives some simple instructions on how to use the aliases created#
 
