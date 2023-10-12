@@ -9,7 +9,7 @@ sudo cp -r * /var/www/html
 
 clear
 # Asks user to create a password for RCON (the user will never use this again nor see this again unless they open up RCON to the world) #
-read -p "Type a password for your rcon console (something strong) " rpass
+read -p "Type a password for your rcon console (something strong): " rpass
 
 # Changes 'localhost' to '127.0.0.1'; why? because I don't like using localhost, I prefer '127.0.0.1'#
 sudo sed -i "s/localhost/127.0.0.1/g" /var/www/html/config.php
