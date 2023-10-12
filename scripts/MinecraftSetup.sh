@@ -171,6 +171,26 @@ alias mcdisable="systemctl disable minecraft.service"
 alias mcenable="systemctl enable minecraft.service"
 EOF
 
+# Asks the user if they would like to install the Minecraft Rcon web console #
+clear
+echo ""
+echo ""
+read -p "Would you like to install the Minecraft Web RCON Console " yn
+echo ""
+echo ""
+
+# Check the user's response #
+ case $yn in
+	[yY] ) echo Installing Apache Web Server and the RCON Web Console;
+        sleep 4
+		bash Apache2Setup.sh;;
+	[nN] ) echo "Moving on then!";
+        break;;
+	* ) echo Invalid response;;
+ esac
+done
+
+
 #Displays a finished screen and gives some simple instructions on how to use the aliases created#
 
 clear
