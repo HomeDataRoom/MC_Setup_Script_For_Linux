@@ -183,7 +183,8 @@ echo ""
  case $yn in
 	[yY] ) echo Installing Apache Web Server and the RCON Web Console;
         sleep 4
-		bash Apache2Setup.sh;;
+		bash Apache2Setup.sh;
+  		break;;
 	[nN] ) echo "Moving on then!";
         break;;
 	* ) echo Invalid response;;
