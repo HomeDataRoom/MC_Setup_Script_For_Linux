@@ -172,6 +172,7 @@ alias mcenable="systemctl enable minecraft.service"
 EOF
 
 # Asks the user if they would like to install the Minecraft Rcon web console #
+while true; do
 clear
 echo ""
 echo ""
