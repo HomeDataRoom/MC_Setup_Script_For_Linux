@@ -204,6 +204,9 @@ sudo systemctl restart minecraft.service
 
 # Have to restart the Minecraft server for a final time because of a weird bug or flaw in older versions of Minecraft that don't load rcon.password='' from the beginning, which breaks 'MinecraftRconSetup.sh #
 
+# Gives the minecraft group permission to edit the /opt/minecraft directory and world directory within #
+sudo chmod -R g+w /opt/minecraft 
+
 # Displays a finished screen and gives some simple instructions on how to use the aliases created #
 
 clear
