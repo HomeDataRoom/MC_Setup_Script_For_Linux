@@ -173,6 +173,9 @@ EOF
 
 #Displays a finished screen and gives some simple instructions on how to use the aliases created#
 
+# Gives the minecraft group permission to edit the /opt/minecraft directory and world directory within #
+sudo chmod -R g+w /opt/minecraft 
+
 clear
 echo ""
 echo ""
