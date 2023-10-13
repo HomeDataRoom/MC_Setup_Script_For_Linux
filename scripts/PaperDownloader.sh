@@ -54,7 +54,7 @@ paperUrl="${paperUrls[$mcVers]}"
 wget $paperUrl
 
 # Decides what version of OpenJDK you need #
-    if [[ $mcVers -ge 4 && $mcVers -le ${#forgeUrls[@]} ]]; then
+    if [[ $mcVers -ge 4 && $mcVers -le ${#paperUrls[@]} ]]; then
         echo "Downloading OpenJDK-8-JRE"
         sudo apt install openjdk-8-jre -y
         break
