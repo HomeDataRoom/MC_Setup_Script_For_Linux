@@ -175,6 +175,7 @@ EOF
 
 # Gives the minecraft group permission to edit the /opt/minecraft directory and world directory within #
 sudo chmod -R g+w /opt/minecraft 
+sudo chmod -R g+w /opt/minecraft/world
 
 clear
 echo ""
