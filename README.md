@@ -41,3 +41,5 @@ The features and functions on the roadmap are not shown in any specific order un
 17. Create a simple document going over each command, function/feature, application, and script of this project 
 
 Some of these are temporary goals which help achieve a larger goal on the list. If something doesn't make sense to be on here, it's probably because it's going to be used later in a bigger feature or function.
+## Credits
+<a href="https://github.com/homedataroom/MC_Setup_Script_For_Linux/graphs/contributors"><img src="https://contrib.rocks/image?repo=homedataroom/MC_Setup_Script_For_Linux"></a>
